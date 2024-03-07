@@ -1,4 +1,4 @@
-# WAD_Project
+# Travel website
 
 •	Filter destinations based on criteria such as price range, date availability, and type of vacation (e.g., beach, adventure, cultural).
 
