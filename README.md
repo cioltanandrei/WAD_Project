@@ -5,6 +5,7 @@
 The xLr8-Travel airline company offers air transport services for passengers, which include convenient e-booking options. Through its online platform, travelers can search for flights, complete bookings, and manage their reservations electronically.
 
 Key features:
+
 • Receive a confirmation email with the booking details and any updates or changes to the flight schedule, to stay informed and plan accordingly for the trip.
 
 • Be able to search for available flights, view information about the facilities available on the flight and view departure and arrival times.
