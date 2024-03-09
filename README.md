@@ -3,8 +3,8 @@
 ![WhatsApp Image 2024-03-07 at 21 54 42_b75c97bf](https://github.com/cioltanandrei/xLr8-travel/assets/12067826/656647fc-6088-41e2-83fa-ba7548c4f538)
 
 
-•	Filter destinations based on criteria such as price range, date availability, and type of vacation (e.g., beach, adventure, cultural).
+• Receive a confirmation email with the booking details and any updates or changes to the flight schedule, to stay informed and plan accordingly for the trip.
 
-•	Upon selecting a travel package, the user should be prompted to provide necessary information such as travel dates, number of travelers, and any special requests.
+• Be able to search for available flights, view information about the facilities available on the flight and view departure and arrival times.
 
-•	Receive a confirmation email with all the details of the reservation and any additional information needed for the trip.
+• Be able to check-in to confirm the flight.
