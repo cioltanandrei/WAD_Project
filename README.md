@@ -17,3 +17,6 @@ Key features:
     • Be able to view and manage user accounts, including creating new ones, changing user information or deleting them as needed.
     •Can add, update or delete flight information, such as flight schedules, available seats and facilities on each route.
     •Can upload and manage flight-related resources like aircraft photos, in-flight entertainment options and advertising materials.
+
+DEMO Mock-up of our web application
+ https://www.figma.com/file/63s16ZvgFhFiQmTqOG1Exf/xLr8-Travel-Airline-Booking-Company?type=design&node-id=0%3A1&mode=design&t=4yRVbFqSFlUORh7i-1
