@@ -1,4 +1,4 @@
-package com.example.xlr8travel.Controllers;
+package org.example.xlr8travel.Controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

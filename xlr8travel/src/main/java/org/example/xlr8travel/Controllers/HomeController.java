@@ -1,4 +1,4 @@
-package com.example.xlr8travel.Controllers;
+package org.example.xlr8travel.Controllers;
 
 import ch.qos.logback.core.model.Model;
 import org.springframework.stereotype.Controller;
