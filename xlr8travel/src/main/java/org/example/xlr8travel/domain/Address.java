@@ -51,7 +51,7 @@ public class Address {
         return Objects.hash(street);
     }
 
-    @ManyToOne
+    @ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private City city;
 
     public void setCity(City city) {
@@ -62,7 +62,7 @@ public class Address {
         return city;
     }
 
-    @ManyToOne
+    @ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private User user;
 
     public void setUser(User user) {

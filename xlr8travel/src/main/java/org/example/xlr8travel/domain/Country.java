@@ -48,7 +48,7 @@ public class Country {
         return Objects.hash(name);
     }
 
-    @OneToMany(mappedBy = "country", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "country")//, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<City> cities = new HashSet<>();
 
     public void addCity(City city) {

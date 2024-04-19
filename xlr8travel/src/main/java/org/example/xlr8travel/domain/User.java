@@ -1,6 +1,9 @@
 package org.example.xlr8travel.domain;
 import lombok.*;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -10,7 +13,7 @@ import java.util.*;
 @Entity
 @ToString(exclude = {})
 
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue
@@ -23,14 +26,54 @@ public class User {
     private String email;
     private String password;
     private LocalDate dob; // date of birth
-    //  @Enumerated(EnumType.ORDINAL) // ce inseamna asta?
-    private Account_Status accountStatus; // cand ii dau cu lista
+    //  @Enumerated(EnumType.ORDINAL) // ?
+    private Account_Status accountStatus; //
 
     // instead of @OneToMany when having collection of basic types or enums
     @ElementCollection(fetch = FetchType.EAGER)
     //private Set<String> roles = new HashSet<>();
-    private List<Role> roles = new ArrayList<>();
+    private List<Role> roles = new ArrayList<>(); // cand un user are mai multe roluri
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        for(Role role : roles)
+            authorities.add(new SimpleGrantedAuthority(role.toString()));
+        return authorities;
+    }
+
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    public User(String firstname, String lastname, String username, int age, String gender, String email, String password, LocalDate dob, Account_Status accountStatus) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
+        this.age = age;
+        this.gender = gender;
+        this.email = email;
+        this.password = password;
+        this.dob = dob;
+        this.accountStatus = accountStatus;
+    }
 
     public User(String firstname, String lastname, String username, int age, String gender, String email, String password, LocalDate dob) {
         this.firstname = firstname;
@@ -43,17 +86,15 @@ public class User {
         this.dob = dob;
     }
 
-    public User(String firstname, String lastname, String username, int age, String gender, String email, String password, LocalDate dob, List<Role> roles, Account_Status accountStatus) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public User(String username, String password) {
         this.username = username;
-        this.age = age;
-        this.gender = gender;
-        this.email = email;
         this.password = password;
-        this.dob = dob;
+    }
+
+    public User(String username, String password, List<Role> roles) {
+        this.username = username;
+        this.password = password;
         this.roles = roles;
-        this.accountStatus = accountStatus;
     }
 
     public Long getId() {
@@ -169,6 +210,18 @@ public class User {
         this.addresses = addresses;
     }
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Set<Ticket> tickets = new HashSet<>();
+
+    public void addTicket(Ticket ticket) {
+        this.getTickets().add(ticket);
+        ticket.setUser(this);
+    }
+
+    public void setTickets(Set<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
    /* @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Payment> payments = new HashSet<>();
 
@@ -181,17 +234,6 @@ public class User {
         this.payments = payments;
     }
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private Set<Ticket> tickets = new HashSet<>();
-
-    public void addTicket(Ticket ticket) {
-        this.getTickets().add(ticket);
-        ticket.setUser(this);
-    }
-
-    public void setTickets(Set<Ticket> tickets) {
-        this.tickets = tickets;
-    }
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Notification> notifications = new HashSet<>();

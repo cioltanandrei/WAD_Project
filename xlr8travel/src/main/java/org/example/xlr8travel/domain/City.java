@@ -48,7 +48,7 @@ public class City {
         return Objects.hash(name);
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Country country;
 
     public void setCountry(Country country) {
@@ -72,7 +72,7 @@ public class City {
     }
 
 
-    @OneToMany(mappedBy = "city", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "city",  cascade = {CascadeType.PERSIST, CascadeType.MERGE})//, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Address> addresses = new HashSet<>();
 
     public void addAddress(Address address) {

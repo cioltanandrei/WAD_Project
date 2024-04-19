@@ -18,7 +18,7 @@ public class Flight {
     @Id
     @GeneratedValue
     private Long id;
-    private  String name;
+    private String name;
     private LocalTime departureTime;
     private LocalTime arrivalTime;
     private String terminal;
@@ -126,14 +126,5 @@ public class Flight {
         this.tickets = tickets;
     }
 
-    @ManyToOne
-    private FlightClass flightClass;
 
-    public void setFlightClass(FlightClass flightClass) {
-        this.flightClass = flightClass;
-    }
-
-    public FlightClass getFlightClass() {
-        return flightClass;
-    }
 }

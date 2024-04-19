@@ -26,6 +26,12 @@ public class Baggage {
         this.price = BaggageTypePrice.determinePrice(BaggageTypeWeight.determineWeight(baggageType)).getPrice();
     }
 
+    public Baggage(BaggageType baggageType, BaggageTypeWeight weight) {
+        this.baggageType = baggageType;
+        this.weight = weight.getWeight();
+        this.price = BaggageTypePrice.determinePrice(BaggageTypeWeight.determineWeight(baggageType)).getPrice();
+    }
+
     public Long getId() {
         return id;
     }
@@ -71,7 +77,7 @@ public class Baggage {
         return Objects.hash(baggageType, weight, price);
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Ticket ticket;
 
     public void setTicket(Ticket ticket) {
