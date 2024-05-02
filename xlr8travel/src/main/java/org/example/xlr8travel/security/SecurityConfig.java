@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+
 import static org.springframework.security.config.Customizer.withDefaults;
 
 
@@ -27,12 +28,12 @@ public class SecurityConfig { private final UserDetailsService userDetailsServic
         http
                 .authorizeHttpRequests((authorizeRequests) ->
                         authorizeRequests
-                                .requestMatchers(HttpMethod.POST,"/products/**")
+                                .requestMatchers(HttpMethod.POST,"/index/**")
                                 .hasAnyRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET,"/products/**","/cart/**")
+                                .requestMatchers(HttpMethod.GET,"/singup/*","/index/*")
                                 .hasAnyRole("USER","ADMIN")
-                                .requestMatchers(HttpMethod.GET,"/admin/**").hasAnyRole("ADMIN")
-                                .requestMatchers("/","/css/**","/images/**").permitAll())
+                                .requestMatchers(HttpMethod.GET,"/signup/**").hasAnyRole("ADMIN")
+                                .requestMatchers("/","/css/*","/**").permitAll())
 
                 .formLogin(withDefaults()).httpBasic().and().csrf().disable();
         return http.build();
