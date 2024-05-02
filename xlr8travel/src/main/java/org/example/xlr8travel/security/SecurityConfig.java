@@ -31,15 +31,12 @@ public class SecurityConfig {
                         authorizeRequests
                                 .requestMatchers(HttpMethod.POST,"/index/**")
                                 .hasAnyRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET,"/login/**")
+                                .requestMatchers(HttpMethod.GET,"/signup/**","/cart/**")
                                 .hasAnyRole("USER","ADMIN")
-                                .requestMatchers(HttpMethod.GET,"/signup/**","/login/**")
-                                .hasAnyRole("ADMIN")
-                                .requestMatchers("/","/css/**","/**").
-                                permitAll());
+                                .requestMatchers(HttpMethod.GET,"/signup/**").hasAnyRole("ADMIN")
+                                .requestMatchers("/","/css/**","/**").permitAll())
 
-
-             // .formLogin().loginPage("/signup").and().csrf().disable();
+                .formLogin(withDefaults()).httpBasic().and().csrf().disable();
         return http.build();
     }
     @Bean
