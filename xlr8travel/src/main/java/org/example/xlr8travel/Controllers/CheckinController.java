@@ -6,11 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value = "/login")
-public class LoginController {
+@RequestMapping(value = "/checkin")
+public class CheckinController {
     @GetMapping
     public ModelAndView getTestData() {
         ModelAndView mv = new ModelAndView();
         return mv;
     }
+
 }
+
+
