@@ -27,12 +27,12 @@ public class SecurityConfig { private final UserDetailsService userDetailsServic
         http
                 .authorizeHttpRequests((authorizeRequests) ->
                         authorizeRequests
-                                .requestMatchers(HttpMethod.POST,"/products/**")
+                                .requestMatchers(HttpMethod.POST,"/index/**")
                                 .hasAnyRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET,"/products/**","/cart/**")
+                                .requestMatchers(HttpMethod.GET,"/signup/**","/cart/**")
                                 .hasAnyRole("USER","ADMIN")
-                                .requestMatchers(HttpMethod.GET,"/admin/**").hasAnyRole("ADMIN")
-                                .requestMatchers("/","/css/**","/images/**").permitAll())
+                                .requestMatchers(HttpMethod.GET,"/signup/**").hasAnyRole("ADMIN")
+                                .requestMatchers("/","/css/**","/**").permitAll())
 
                 .formLogin(withDefaults()).httpBasic().and().csrf().disable();
         return http.build();
