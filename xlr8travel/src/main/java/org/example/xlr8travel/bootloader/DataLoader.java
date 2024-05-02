@@ -130,11 +130,11 @@ public class DataLoader implements CommandLineRunner {
         user1.addAddress(address1);
 
 
-        User user2=new User("user2",bcrypt.encode("user2"));
-        user2.getRoles().add(Role.ROLE_ADMIN);
+        //User user2=new User("user2",bcrypt.encode("user2"));
+       // user2.getRoles().add(Role.ROLE_ADMIN);
 
         userService.save(user1);
-        userService.save(user2);
+       // userService.save(user2);
 
         //----------------------------------------------------------------------
 

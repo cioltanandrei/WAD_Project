@@ -16,7 +16,9 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 
 @Configuration
-public class SecurityConfig { private final UserDetailsService userDetailsService;
+public class SecurityConfig {
+
+    private final UserDetailsService userDetailsService;
 
     public SecurityConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -29,17 +31,20 @@ public class SecurityConfig { private final UserDetailsService userDetailsServic
                         authorizeRequests
                                 .requestMatchers(HttpMethod.POST,"/index/**")
                                 .hasAnyRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET,"/signup/**","/cart/**")
+                                .requestMatchers(HttpMethod.GET,"/login/**")
                                 .hasAnyRole("USER","ADMIN")
-                                .requestMatchers(HttpMethod.GET,"/signup/**").hasAnyRole("ADMIN")
-                                .requestMatchers("/","/css/**","/**").permitAll())
+                                .requestMatchers(HttpMethod.GET,"/signup/**","/login/**")
+                                .hasAnyRole("ADMIN")
+                                .requestMatchers("/","/css/**","/**").
+                                permitAll());
 
-                .formLogin(withDefaults()).httpBasic().and().csrf().disable();
+
+             // .formLogin().loginPage("/signup").and().csrf().disable();
         return http.build();
     }
     @Bean
     PasswordEncoder passwordEncoder(){
-        return  new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder();
     }
     @Bean
     public ProviderManager authManagerBean(HttpSecurity security) throws Exception {
