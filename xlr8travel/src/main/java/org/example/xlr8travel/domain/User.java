@@ -86,10 +86,10 @@ public class User implements UserDetails {
         this.dob = dob;
     }
 
-    /*public User(String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-    }*/
+    }
 
     public User(String username, String password, List<Role> roles) {
         this.username = username;
@@ -97,10 +97,7 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public User(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
+
 
 
     public Long getId() {
