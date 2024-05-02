@@ -61,15 +61,15 @@ public class FlightClass {
     }
 
     @OneToMany(mappedBy = "flightClass", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private Set<Flight> flights = new HashSet<>();
+    private Set<Ticket> tickets = new HashSet<>();
 
-    public void addFlight(Flight flight) {
-        this.getFlights().add(flight);
-        flight.setFlightClass(this);
+    public void addTicket(Ticket ticket) {
+        this.getTickets().add(ticket);
+        ticket.setFlightClass(this);
     }
 
-    public void setFlights(Set<Flight> flights) {
-        this.flights = flights;
+    public void setTickets(Set<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
 

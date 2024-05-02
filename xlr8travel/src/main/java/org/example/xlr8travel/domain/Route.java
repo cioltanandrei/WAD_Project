@@ -61,7 +61,7 @@ public class Route {
         return Objects.hash(distance, duration);
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Airport sourceAirport;
 
     public void setSourceAirport(Airport sourceAirport) {
@@ -72,7 +72,7 @@ public class Route {
         return sourceAirport;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Airport destinationAirport;
 
     public void setDestinationAirport(Airport destinationAirport) {

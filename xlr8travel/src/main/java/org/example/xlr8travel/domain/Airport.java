@@ -20,6 +20,18 @@ public class Airport {
     private String iataCode;
     private String description;
 
+    public Airport(String name, String iataCode, String description) {
+        this.name = name;
+        this.iataCode = iataCode;
+        this.description = description;
+    }
+
+    public Airport(String name, String iataCode,  City city) {
+        this.name = name;
+        this.iataCode = iataCode;
+        this.city = city;
+    }
+
     public Long getId() {
         return id;
     }
@@ -65,7 +77,7 @@ public class Airport {
         return Objects.hash(name, iataCode, description);
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private City city;
 
     public void setCity(City city) {
