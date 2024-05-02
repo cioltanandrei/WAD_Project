@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value = "/login")
-public class LoginController {
+@RequestMapping(value = "/checkin2")
+public class Checking2Controller {
     @GetMapping
     public ModelAndView getTestData() {
         ModelAndView mv = new ModelAndView();
