@@ -35,8 +35,9 @@ public class SecurityConfig {
                                 .requestMatchers("/", "/css/**","/loginn/**", "/signup/**","/**").permitAll())
                 .formLogin(form -> form
                         .loginPage("/loginn")  // Specify the path to your login page
-                        .defaultSuccessUrl("/index", true)  // Redirect to index on success
+                        .defaultSuccessUrl("/index2", true)  // Redirect to index on success
                         .permitAll())
+                .logout(logout -> logout.logoutSuccessUrl("/index"))
                 .httpBasic().and().csrf().disable();
         return http.build();
     }
