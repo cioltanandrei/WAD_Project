@@ -7,16 +7,20 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
 
 @Configuration
-public class SecurityConfig {
+@EnableWebSecurity
+public class SecurityConfig{
 
     private final UserDetailsService userDetailsService;
 
@@ -25,20 +29,38 @@ public class SecurityConfig {
     }
 
     @Bean
+    public UserDetailsService userDetailsService(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+        manager.createUser(User.withUsername("user")
+                .password(bCryptPasswordEncoder.encode("userPass"))
+                .roles("USER")
+                .build());
+        manager.createUser(User.withUsername("admin")
+                .password(bCryptPasswordEncoder.encode("adminPass"))
+                .roles("USER", "ADMIN")
+                .build());
+        return manager;
+    }
+
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((authorizeRequests) ->
-                        authorizeRequests
-                                .requestMatchers(HttpMethod.POST, "/index/**").hasAnyRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET, "/loginn/**", "/cart/**").hasAnyRole("USER", "ADMIN")
-                                //.requestMatchers(HttpMethod.GET, "/signup/**").hasAnyRole("ADMIN")
-                                .requestMatchers("/", "/css/**","/loginn/**", "/signup/**","/**").permitAll())
+                .csrf().and()  // Enable CSRF protection
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.POST, "/index/**").hasAnyRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/loginn/**", "/cart/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/", "/css/**", "/loginn/", "/signup/", "/**").permitAll())
                 .formLogin(form -> form
-                        .loginPage("/loginn")  // Specify the path to your login page
-                        .defaultSuccessUrl("/index2", true)  // Redirect to index on success
+                        .loginPage("/loginn")
+                        .defaultSuccessUrl("/index", true)
                         .permitAll())
-                .logout(logout -> logout.logoutSuccessUrl("/index"))
-                .httpBasic().and().csrf().disable();
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/index")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                        .permitAll())
+                .httpBasic();
         return http.build();
     }
     @Bean

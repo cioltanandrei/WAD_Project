@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head>
     <meta charset="UTF-8" />
@@ -35,13 +36,27 @@
                 <li class="nav-item  me-4">
                     <a class="nav-link active" href="checkin">Check-in & Booking</a>
                 </li>
-                <li class="nav-item  me-4">
-                    <a class="nav-link active" href="signup">Sign In</a>
+                <li class="nav-item  me-4" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link active" href="signup">Sign Up</a>
                 </li>
+                <li class="nav-item  me-4" sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" method="post" id="my_form">
+                        <a class="nav-link active" type="submit" href="javascript:{}" onclick="document.getElementById('my_form').submit(); return false;">Log Out</a>
+                    </form>
+                </li>
+
+
+
+                        <!-- Other nav items -->
             </ul>
         </div>
     </nav>
 </div>
+
+<div sec:authentication="name">
+    The value of the "name" property of the authentication object should appear here.
+</div>
+
 
     <div class="container-fluid">
         <div class="row">
