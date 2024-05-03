@@ -97,6 +97,16 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    public User(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        if(email.equals("admin@gmail.com")){
+            this.getRoles().add(Role.ROLE_ADMIN);
+        }else {
+            this.getRoles().add(Role.ROLE_USER);
+        }
+    }
 
 
 

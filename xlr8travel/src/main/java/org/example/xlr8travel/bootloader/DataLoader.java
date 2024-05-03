@@ -120,7 +120,7 @@ public class DataLoader implements CommandLineRunner {
         Address address2 = new Address("Str. Hochenheimer");
 
        city1.addAddress(address1); // work with DTO!!!!
-         city3.addAddress(address2); // can't save address without saving the person
+        city3.addAddress(address2); // can't save address without saving the person
 
 
         PasswordEncoder bcrypt = new BCryptPasswordEncoder();
@@ -130,7 +130,7 @@ public class DataLoader implements CommandLineRunner {
         user1.addAddress(address1);
 
 
-        User user2=new User("user2",bcrypt.encode("user2"));
+        User user2=new User("user2",bcrypt.encode("user2"),"a@y.com");
         user2.getRoles().add(Role.ROLE_ADMIN);
 
         userService.save(user1);

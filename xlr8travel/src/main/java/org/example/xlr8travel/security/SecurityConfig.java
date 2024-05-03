@@ -29,14 +29,15 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((authorizeRequests) ->
                         authorizeRequests
-                                .requestMatchers(HttpMethod.POST,"/index/**")
-                                .hasAnyRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET,"/loginn/**","/cart/**")
-                                .hasAnyRole("USER","ADMIN")
-                                .requestMatchers(HttpMethod.GET,"/signup/**").hasAnyRole("ADMIN")
-                                .requestMatchers("/","/css/**","/**").permitAll())
-
-                .formLogin(withDefaults()).httpBasic().and().csrf().disable();
+                                .requestMatchers(HttpMethod.POST, "/index/**").hasAnyRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/loginn/**", "/cart/**").hasAnyRole("USER", "ADMIN")
+                                //.requestMatchers(HttpMethod.GET, "/signup/**").hasAnyRole("ADMIN")
+                                .requestMatchers("/", "/css/**","/loginn/**", "/signup/**","/**").permitAll())
+                .formLogin(form -> form
+                        .loginPage("/loginn")  // Specify the path to your login page
+                        .defaultSuccessUrl("/index", true)  // Redirect to index on success
+                        .permitAll())
+                .httpBasic().and().csrf().disable();
         return http.build();
     }
     @Bean
