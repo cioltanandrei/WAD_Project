@@ -31,7 +31,7 @@ public class SecurityConfig {
                         authorizeRequests
                                 .requestMatchers(HttpMethod.POST,"/index/**")
                                 .hasAnyRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET,"/signup/**","/cart/**")
+                                .requestMatchers(HttpMethod.GET,"/loginn/**","/cart/**")
                                 .hasAnyRole("USER","ADMIN")
                                 .requestMatchers(HttpMethod.GET,"/signup/**").hasAnyRole("ADMIN")
                                 .requestMatchers("/","/css/**","/**").permitAll())
