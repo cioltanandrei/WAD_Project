@@ -155,7 +155,7 @@ public class DataLoader implements CommandLineRunner {
                 seat1
         );
 
-        ticket1.addBaggage(baggage1);// nu adauga pretul bagajului
+        ticket1.addBaggage(baggage1);
         ticket1.addBaggage(baggage2);// la baggage trebuia sa arate de 2 ori ticketul 1 pt baggage1 si baggage2
 
 

@@ -29,7 +29,7 @@ public class Baggage {
     public Baggage(BaggageType baggageType, BaggageTypeWeight weight) {
         this.baggageType = baggageType;
         this.weight = weight.getWeight();
-        this.price = BaggageTypePrice.determinePrice(BaggageTypeWeight.determineWeight(baggageType)).getPrice();
+        this.price = BaggageTypePrice.determinePrice(weight).getPrice();
     }
 
     public Long getId() {
