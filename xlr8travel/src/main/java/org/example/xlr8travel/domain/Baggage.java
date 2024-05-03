@@ -69,15 +69,15 @@ public class Baggage {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Baggage baggage = (Baggage) o;
-        return weight == baggage.weight && Float.compare(price, baggage.price) == 0 && baggageType == baggage.baggageType;
+        return id != null && id.equals(baggage.id) && weight == baggage.weight && Float.compare(price, baggage.price) == 0 && baggageType == baggage.baggageType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baggageType, weight, price);
+        return Objects.hash(baggageType, weight, price, id);
     }
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    /*@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Ticket ticket;
 
     public void setTicket(Ticket ticket) {
@@ -86,6 +86,9 @@ public class Baggage {
 
     public Ticket getTicket() {
         return ticket;
-    }
+    }*/
+
+    @ManyToMany(mappedBy = "baggages", cascade = CascadeType.PERSIST)
+    private Set<Ticket> tickets = new HashSet<>();
 
 }

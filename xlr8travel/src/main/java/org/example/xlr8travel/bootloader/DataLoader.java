@@ -147,6 +147,7 @@ public class DataLoader implements CommandLineRunner {
 
         Baggage baggage1 = new Baggage(BaggageType.BAGGAGE_TYPE_CARRY_ON); // not sure about baggage type weight..
         Baggage baggage2 = new Baggage(BaggageType.BAGGAGE_TYPE_CHECKED, BaggageTypeWeight.BAGGAGE_TYPE_WEIGHT_CHECKED_15);
+        Baggage baggage3 = new Baggage(BaggageType.BAGGAGE_TYPE_CHECKED, BaggageTypeWeight.BAGGAGE_TYPE_WEIGHT_CHECKED_20);
 
         Ticket ticket1 = new Ticket(
                 299.99f,
@@ -156,7 +157,7 @@ public class DataLoader implements CommandLineRunner {
         );
 
         ticket1.addBaggage(baggage1);
-        ticket1.addBaggage(baggage2);// la baggage trebuia sa arate de 2 ori ticketul 1 pt baggage1 si baggage2
+        ticket1.addBaggage(baggage2);// relation many to many
 
 
         flightClass2.addTicket(ticket1);// relationship is one to many but its one flightclass per ticket
@@ -174,6 +175,7 @@ public class DataLoader implements CommandLineRunner {
         );
 
         ticket2.addBaggage(baggage1);
+        ticket2.addBaggage(baggage3);
 
         flightClass1.addTicket(ticket2);
 

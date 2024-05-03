@@ -109,7 +109,8 @@ public class Ticket {
     private Seat seat;
 
 
-    @OneToMany(mappedBy = "ticket", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    /*@OneToMany(mappedBy = "ticket", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    //@OneToMany(mappedBy = "ticket", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private Set<Baggage> baggages = new HashSet<>();
 
     public void addBaggage(Baggage baggage){
@@ -119,6 +120,19 @@ public class Ticket {
 
     public void setBaggages(Set<Baggage> baggages) {
         this.baggages = baggages;
+    }*/
+
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+            @JoinTable(
+                    name = "ticket_baggage",
+                    joinColumns = @JoinColumn(name = "ticket_id"),
+                    inverseJoinColumns = @JoinColumn(name = "baggage_id")
+            )
+    private Set<Baggage> baggages = new HashSet<>();
+
+    public void addBaggage(Baggage baggage){
+        baggages.add(baggage);
+        baggage.getTickets().add(this);
     }
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
