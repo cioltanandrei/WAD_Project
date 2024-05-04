@@ -55,4 +55,17 @@ public class UserServiceImpl implements UserService{
             throw new IllegalArgumentException("User not found with ID: " + id);
         }
     }
+
+    @Override
+    public void addUser(User user) {
+        // Check if the username already exists
+
+
+        // Check if the email address already exists
+
+        // Perform any additional validation if needed
+
+        // Save the user to the database
+        userRepository.save(user);
+    }
 }
