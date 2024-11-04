@@ -9,6 +9,8 @@ import java.util.*;
 @AllArgsConstructor
 @Entity
 @ToString(exclude = {})
+@Getter
+@Setter
 public class City {
     @Id
     @GeneratedValue
@@ -16,22 +18,6 @@ public class City {
     private String name;
 
     public City(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 
@@ -51,14 +37,6 @@ public class City {
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Country country;
 
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
     @OneToMany(mappedBy = "city", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Airport> airports = new HashSet<>();
 
@@ -66,11 +44,6 @@ public class City {
         this.getAirports().add(airport);
         airport.setCity(this);
     }
-
-    public void setAirports(Set<Airport> airports) {
-        this.airports = airports;
-    }
-
 
     @OneToMany(mappedBy = "city",  cascade = {CascadeType.PERSIST, CascadeType.MERGE})//, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Address> addresses = new HashSet<>();
@@ -80,7 +53,5 @@ public class City {
         address.setCity(this);
     }
 
-    public void setAddresses(Set<Address> addresses) {
-        this.addresses = addresses;
-    }
+
 }

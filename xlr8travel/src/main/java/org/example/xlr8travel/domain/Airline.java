@@ -9,6 +9,8 @@ import java.util.*;
 @AllArgsConstructor
 @Entity
 @ToString(exclude = {})
+@Getter
+@Setter
 public class Airline {
 
     @Id
@@ -19,30 +21,6 @@ public class Airline {
 
     public Airline(String name, String iataCode) {
         this.name = name;
-        this.iataCode = iataCode;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getIataCode() {
-        return iataCode;
-    }
-
-    public void setIataCode(String iataCode) {
         this.iataCode = iataCode;
     }
 
@@ -67,9 +45,6 @@ public class Airline {
         flight.setAirline(this);
     }
 
-    public void setFlights(Set<Flight> flights) {
-        this.flights = flights;
-    }
 
     @OneToMany(mappedBy = "airline",cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Aircraft> aircrafts = new HashSet<>();
@@ -77,10 +52,6 @@ public class Airline {
     public void addAircraft(Aircraft aircraft){
         this.getAircrafts().add(aircraft);
         aircraft.setAirline(this);
-    }
-
-    public void setAircrafts(Set<Aircraft> aircrafts) {
-        this.aircrafts = aircrafts;
     }
 
 
@@ -92,7 +63,4 @@ public class Airline {
         route.setAirline(this);
     }
 
-    public void setRoutes(Set<Route> routes) {
-        this.routes = routes;
-    }
 }

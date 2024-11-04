@@ -8,8 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "/index")
 public class HomeController {
+
     @GetMapping
-    public String list(final Model model) {
-        return "index.html";
+    public String list() {
+        return "index";
+    }
+
+    @GetMapping("2")
+    public String list2(final Model model) {
+        return "index2";
     }
 }

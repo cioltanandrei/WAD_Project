@@ -11,6 +11,8 @@ import java.util.*;
 @AllArgsConstructor
 @Entity
 @ToString(exclude = {})
+@Getter
+@Setter
 public class Address {
 
     @Id
@@ -19,22 +21,6 @@ public class Address {
     private String street;
 
     public Address(String street) {
-        this.street = street;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
         this.street = street;
     }
 
@@ -54,22 +40,7 @@ public class Address {
     @ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private City city;
 
-    public void setCity(City city) {
-        this.city = city;
-    }
-
-    public City getCity() {
-        return city;
-    }
-
     @ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private User user;
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public User getUser() {
-        return user;
-    }
 }

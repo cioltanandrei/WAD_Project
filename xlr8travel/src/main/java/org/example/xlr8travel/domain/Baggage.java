@@ -10,6 +10,8 @@ import java.util.*;
 @AllArgsConstructor
 @Entity
 @ToString(exclude = {})
+@Getter
+@Setter
 public class Baggage {
 
     @Id
@@ -32,37 +34,6 @@ public class Baggage {
         this.price = BaggageTypePrice.determinePrice(weight).getPrice();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public BaggageType getBaggageType() {
-        return baggageType;
-    }
-
-    public void setBaggageType(BaggageType baggageType) {
-        this.baggageType = baggageType;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
 
     @Override
     public boolean equals(Object o) {

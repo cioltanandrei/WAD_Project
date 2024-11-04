@@ -8,6 +8,8 @@ import java.util.*;
 @AllArgsConstructor
 @Entity
 @ToString(exclude = {})
+@Getter
+@Setter
 public class Aircraft {
 
     @Id
@@ -37,94 +39,6 @@ public class Aircraft {
         this.maxFlightRangeMiles = maxFlightRangeMiles;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public int getSeatCapacity() {
-        return seatCapacity;
-    }
-
-    public void setSeatCapacity(int seatCapacity) {
-        this.seatCapacity = seatCapacity;
-    }
-
-    public int getCargoCapacity() {
-        return cargoCapacity;
-    }
-
-    public void setCargoCapacity(int cargoCapacity) {
-        this.cargoCapacity = cargoCapacity;
-    }
-
-    public String getFacility() {
-        return facility;
-    }
-
-    public void setFacility(String facility) {
-        this.facility = facility;
-    }
-
-    public String getMaxTakeoffWeight() {
-        return maxTakeoffWeight;
-    }
-
-    public void setMaxTakeoffWeight(String maxTakeoffWeight) {
-        this.maxTakeoffWeight = maxTakeoffWeight;
-    }
-
-    public int getFuelCapacity() {
-        return fuelCapacity;
-    }
-
-    public void setFuelCapacity(int fuelCapacity) {
-        this.fuelCapacity = fuelCapacity;
-    }
-
-    public double getMaxFlightRangeKm() {
-        return maxFlightRangeKm;
-    }
-
-    public void setMaxFlightRangeKm(double maxFlightRangeKm) {
-        this.maxFlightRangeKm = maxFlightRangeKm;
-    }
-
-    public double getMaxFlightRangeMiles() {
-        return maxFlightRangeMiles;
-    }
-
-    public void setMaxFlightRangeMiles(double maxFlightRangeMiles) {
-        this.maxFlightRangeMiles = maxFlightRangeMiles;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -141,11 +55,4 @@ public class Aircraft {
     @ManyToOne
     private Airline airline;
 
-    public void setAirline(Airline airline) {
-        this.airline = airline;
-    }
-
-    public Airline getAirline() {
-        return airline;
-    }
 }

@@ -67,6 +67,7 @@ public class SecurityConfig{
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public ProviderManager authManagerBean(HttpSecurity security) throws Exception {
         return (ProviderManager) security.getSharedObject(AuthenticationManagerBuilder.class)

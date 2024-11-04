@@ -10,7 +10,8 @@ import java.util.*;
 @AllArgsConstructor
 @Entity
 @ToString(exclude = {})
-
+@Getter
+@Setter
 public class Airport {
 
     @Id
@@ -32,37 +33,6 @@ public class Airport {
         this.city = city;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getIataCode() {
-        return iataCode;
-    }
-
-    public void setIataCode(String iataCode) {
-        this.iataCode = iataCode;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -80,13 +50,6 @@ public class Airport {
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private City city;
 
-    public void setCity(City city) {
-        this.city = city;
-    }
-
-    public City getCity() {
-        return city;
-    }
 
     @OneToMany(mappedBy = "sourceAirport",cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Route> sourceRoutes = new HashSet<>();
@@ -94,10 +57,6 @@ public class Airport {
     public void addSourceRoute(Route route){
         this.getSourceRoutes().add(route);
         route.setSourceAirport(this);
-    }
-
-    public void setSourceRoutes(Set<Route> sourceRoutes) {
-        this.sourceRoutes = sourceRoutes;
     }
 
     @OneToMany(mappedBy = "destinationAirport",cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
@@ -108,8 +67,5 @@ public class Airport {
         route.setDestinationAirport(this);
     }
 
-    public void setDestinationRoutes(Set<Route> destinationRoutes) {
-        this.destinationRoutes = destinationRoutes;
-    }
 
 }

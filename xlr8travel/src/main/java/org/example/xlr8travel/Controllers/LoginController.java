@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/loginn")
 public class LoginController {
+
     @GetMapping
     public String login(Model model, @RequestParam(value = "error", required = false) String error) {
         if (error != null) {
@@ -18,4 +19,5 @@ public class LoginController {
         }
         return "loginn";  // Make sure 'loginn' matches your login view file name
     }
+
 }

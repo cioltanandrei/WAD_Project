@@ -8,11 +8,27 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(value = "/checkin")
 public class CheckinController {
-    @GetMapping
-    public ModelAndView getTestData() {
-        ModelAndView mv = new ModelAndView();
-        return mv;
+
+    @GetMapping("/1")
+    public String getCheckinPage() {
+        return "checkin";
     }
+
+    @GetMapping("/2")
+    public String getCheckinPage2() {
+        return "checkin2";
+    }
+
+    @GetMapping("/3")
+    public ModelAndView getCheckinPage3() {
+        return new ModelAndView("checkin3");
+    }
+
+    @GetMapping("/4")
+    public ModelAndView getCheckinPage4() {
+        return new ModelAndView("checkin4");
+    }
+
 
 }
 

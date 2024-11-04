@@ -1,10 +1,7 @@
 package org.example.xlr8travel.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -16,6 +13,8 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @ToString(exclude = {})
+@Getter
+@Setter
 public class Ticket {
 
     @Id
@@ -37,39 +36,6 @@ public class Ticket {
         this.ticketStatus = ticketStatus;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
-    public LocalDateTime getPurchaseTime() {
-        return purchaseTime;
-    }
-
-    public void setPurchaseTime(LocalDateTime purchaseTime) {
-        this.purchaseTime = purchaseTime;
-    }
-
-    public TicketStatus getTicketStatus() {
-        return ticketStatus;
-    }
-
-    public void setTicketStatus(TicketStatus ticketStatus) {
-        this.ticketStatus = ticketStatus;
-    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -86,24 +52,9 @@ public class Ticket {
     @ManyToOne
     private User user;
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public User getUser() {
-        return user;
-    }
 
     @ManyToOne
     private Flight flight;
-
-    public void setFlight(Flight flight) {
-        this.flight = flight;
-    }
-
-    public Flight getFlight() {
-        return flight;
-    }
 
     @OneToOne(cascade = CascadeType.PERSIST)
     private Seat seat;
@@ -137,13 +88,5 @@ public class Ticket {
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private FlightClass flightClass;
-
-    public void setFlightClass(FlightClass flightClass) {
-        this.flightClass = flightClass;
-    }
-
-    public FlightClass getFlightClass() {
-        return flightClass;
-    }
 
 }

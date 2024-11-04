@@ -10,6 +10,8 @@ import java.util.*;
 @AllArgsConstructor
 @Entity
 @ToString(exclude = {})
+@Getter
+@Setter
 public class FlightClass {
 
     @Id
@@ -20,30 +22,6 @@ public class FlightClass {
 
     public FlightClass(float fare, FlightClassType flightClassType) {
         this.fare = fare;
-        this.flightClassType = flightClassType;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public float getFare() {
-        return fare;
-    }
-
-    public void setFare(float fare) {
-        this.fare = fare;
-    }
-
-    public FlightClassType getFlightClassType() {
-        return flightClassType;
-    }
-
-    public void setFlightClassType(FlightClassType flightClassType) {
         this.flightClassType = flightClassType;
     }
 
@@ -67,11 +45,5 @@ public class FlightClass {
         this.getTickets().add(ticket);
         ticket.setFlightClass(this);
     }
-
-    public void setTickets(Set<Ticket> tickets) {
-        this.tickets = tickets;
-    }
-
-
 
 }

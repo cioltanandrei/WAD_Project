@@ -9,29 +9,16 @@ import java.util.*;
 @AllArgsConstructor
 @Entity
 @ToString(exclude = {})
+@Getter
+@Setter
 public class Country {
+
     @Id
     @GeneratedValue
     private Long id;
     private String name;
 
     public Country(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 
@@ -56,8 +43,5 @@ public class Country {
         city.setCountry(this);
     }
 
-   public void setCities(Set<City> cities) {
-        this.cities = cities;
-    }
 
 }

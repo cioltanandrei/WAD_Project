@@ -11,6 +11,8 @@ import java.util.*;
 @AllArgsConstructor
 @Entity
 @ToString(exclude = {})
+@Getter
+@Setter
 public class Route {
 
     @Id
@@ -21,30 +23,6 @@ public class Route {
 
     public Route(int distance, LocalTime duration) {
         this.distance = distance;
-        this.duration = duration;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getDistance() {
-        return distance;
-    }
-
-    public void setDistance(int distance) {
-        this.distance = distance;
-    }
-
-    public LocalTime getDuration() {
-        return duration;
-    }
-
-    public void setDuration(LocalTime duration) {
         this.duration = duration;
     }
 
@@ -64,33 +42,10 @@ public class Route {
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Airport sourceAirport;
 
-    public void setSourceAirport(Airport sourceAirport) {
-        this.sourceAirport = sourceAirport;
-    }
-
-    public Airport getSourceAirport() {
-        return sourceAirport;
-    }
-
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Airport destinationAirport;
-
-    public void setDestinationAirport(Airport destinationAirport) {
-        this.destinationAirport = destinationAirport;
-    }
-
-    public Airport getDestinationAirport() {
-        return destinationAirport;
-    }
 
     @ManyToOne
     private Airline airline;
 
-    public void setAirline(Airline airline) {
-        this.airline = airline;
-    }
-
-    public Airline getAirline() {
-        return airline;
-    }
 }

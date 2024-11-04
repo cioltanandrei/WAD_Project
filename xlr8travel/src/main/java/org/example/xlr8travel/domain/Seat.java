@@ -1,10 +1,7 @@
 package org.example.xlr8travel.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Objects;
 
@@ -13,6 +10,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 @ToString(exclude = {})
+@Getter
+@Setter
 public class Seat {
 
     @Id
@@ -30,45 +29,10 @@ public class Seat {
         this.seatPrice = SeatPrice.getPriceByType(seatType);  // Correctly determine price from type
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getSeatNumber() {
-        return seatNumber;
-    }
-
-    public void setSeatNumber(String seatNumber) {
-        this.seatNumber = seatNumber;
-    }
-
-    public boolean isBooked() {
-        return isBooked;
-    }
-
-    public void setBooked(boolean booked) {
-        isBooked = booked;
-    }
-
-    public SeatType getSeatType() {
-        return seatType;
-    }
-
     public void setSeatType(SeatType seatType) {
         this.seatType = seatType;
-        this.seatPrice = SeatPrice.getPriceByType(seatType);  // Correctly determine price from type
-    }
-
-    public SeatPrice getSeatPrice() {
-        return seatPrice;
-    }
-
-    public void setSeatPrice(SeatPrice seatPrice) {
-        this.seatPrice = seatPrice;
+        this.seatPrice = SeatPrice.getPriceByType(seatType);
+        // Correctly determine price from type
     }
 
     @Override
