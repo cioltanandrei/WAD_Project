@@ -1,6 +1,6 @@
 package org.example.xlr8travel.services;
 
-import org.example.xlr8travel.domain.User;
+import org.example.xlr8travel.models.User;
 import org.example.xlr8travel.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 

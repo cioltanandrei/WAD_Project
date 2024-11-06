@@ -1,6 +1,6 @@
 package org.example.xlr8travel.bootloader;
 
-import org.example.xlr8travel.domain.*;
+import org.example.xlr8travel.models.*;
 import org.example.xlr8travel.services.AirlineService;
 import org.example.xlr8travel.services.FlightService;
 import org.example.xlr8travel.services.TicketService;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.List;
 
 
 @Component

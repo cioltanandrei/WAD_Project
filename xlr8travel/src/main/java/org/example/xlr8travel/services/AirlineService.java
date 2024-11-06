@@ -1,6 +1,6 @@
 package org.example.xlr8travel.services;
 
-import org.example.xlr8travel.domain.Airline;
+import org.example.xlr8travel.models.Airline;
 
 import java.util.List;
 

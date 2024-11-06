@@ -1,6 +1,6 @@
 package org.example.xlr8travel.security;
 
-import org.example.xlr8travel.domain.User;
+import org.example.xlr8travel.models.User;
 import org.example.xlr8travel.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

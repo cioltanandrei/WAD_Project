@@ -1,6 +1,6 @@
 package org.example.xlr8travel.repositories;
 
-import org.example.xlr8travel.domain.User;
+import org.example.xlr8travel.models.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

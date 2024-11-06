@@ -1,9 +1,8 @@
 package org.example.xlr8travel.services;
 
-import org.example.xlr8travel.domain.Ticket;
+import org.example.xlr8travel.models.Ticket;
 import org.example.xlr8travel.repositories.TicketRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
