@@ -3,7 +3,6 @@
     src: url(../lexend.ttf);
 }
 
-
 .navbar{
 
     background-image: linear-gradient(to right, #5DB4D0, #3F92B7);
@@ -64,4 +63,3 @@ height: 10vw;
 object-fit: cover;
 
   }
-

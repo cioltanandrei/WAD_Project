@@ -1,18 +1,16 @@
 package org.example.xlr8travel.services;
 
+import lombok.RequiredArgsConstructor;
 import org.example.xlr8travel.models.Ticket;
 import org.example.xlr8travel.repositories.TicketRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class TicketServiceImpl implements TicketService{
+@RequiredArgsConstructor
+public class TicketServiceImpl implements TicketService {
 
     private final TicketRepository ticketRepository;
-
-    public TicketServiceImpl(TicketRepository ticketRepository) {
-        this.ticketRepository = ticketRepository;
-    }
 
     @Override
     public void save(Ticket ticket) {

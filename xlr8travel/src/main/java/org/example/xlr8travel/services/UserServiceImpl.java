@@ -1,5 +1,6 @@
 package org.example.xlr8travel.services;
 
+import lombok.RequiredArgsConstructor;
 import org.example.xlr8travel.models.User;
 import org.example.xlr8travel.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -8,12 +9,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService{
-    private final UserRepository userRepository;
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService {
 
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final UserRepository userRepository;
 
     @Override
     public void save(User user) {
