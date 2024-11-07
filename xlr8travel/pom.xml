@@ -8,11 +8,13 @@
 		<version>3.2.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>org.example</groupId>
 	<artifactId>xlr8travel</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>xlr8travel</name>
 	<description>xlr8travel</description>
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -65,13 +67,6 @@
 			<version>3.1.2.RELEASE</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>6.0.2</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
