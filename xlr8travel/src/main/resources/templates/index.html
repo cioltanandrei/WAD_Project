@@ -15,6 +15,9 @@
             src="https://code.jquery.com/jquery-1.12.4.js"
             integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
             crossorigin="anonymous"></script>
+    <script
+        src="/css/script.js">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" type="text/css" media="screen"
           href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css"/>
@@ -22,6 +25,12 @@
     <script>
         $(document).ready(function(){
             $("#productName").autocomplete({
+                source: "/autocomplete",
+            });
+        });
+
+        $(document).ready(function(){
+            $("#productName2").autocomplete({
                 source: "/autocomplete",
             });
         });
@@ -104,27 +113,83 @@
                         <!-- <li class="list-inline-item p-0 m-0 py-2 px-5 border">Origin</li>
                             <li class="list-inline-item p-0 py-2 px-5 border" style="margin-left: -1%;">Destination</li> -->
                         <div class="flex-row d-flex mt-3">
+
                             <div class="col-3 col-sm-4 col-lg-3 d-flex flex-column flex-lg-row flex-md-row flex-sm-row ms-lg-1">
-                                <input type="text" class="form-control bg-light px-3 rounded-0 text-center" placeholder="Origin"
-                                       aria-label="Origin"/>
-                                <input type="text" class="form-control bg-light px-3 rounded-0 text-center" placeholder="Destination"
-                                       aria-label="Destination" />
+
+                                    <input id="productName" name="country" placeholder="Origin" class="form-control bg-light px-3 rounded-0 text-center">
+                                    <input id="productName2" name="country" placeholder="Destination" class="form-control bg-light px-3 rounded-0 text-center">
+
                             </div>
 
                             <div class="col-3 col-lg-5 col-sm-4 d-flex flex-column flex-lg-row flex-md-row flex-sm-row"
                                  style="margin-left: 6vw;">
-                                <input type="text" class="form-control bg-light px-3 rounded-0 text-center" placeholder="Departure"
-                                       aria-label="Departure" />
-                                <input type="text" class="form-control bg-light px-3 rounded-0 text-center" placeholder="Return"
+                                <input type="date" class="form-control bg-light px-3 rounded-0 text-center" placeholder="Departure"
+                                       aria-label="Departure"/>
+                                <input type="date" class="form-control bg-light px-3 rounded-0 text-center" placeholder="Return"
                                        aria-label="Return" />
-                                <input type="text" class="form-control bg-light px-3 m-0 rounded-0 text-center" placeholder="Passengers"
-                                       aria-label="Passengers" />
+
+                                <form class="col-3 col-lg-5 col-sm-4 d-flex flex-column flex-lg-row flex-md-row flex-sm-row " style="margin-left: 3vw;" th:action="@{/selectPassengers}" method="post">
+                                    <div class="dropdown">
+                                        <button class="dropdown-btn" id="dropdownBtn" type="button">
+                                            Passengers: <span id="totalPassengers">1 adult</span>
+                                        </button>
+                                        <div class="dropdown-content" id="dropdownContent">
+                                            <div class="passenger-type">
+                                                <label>Adults (14+)</label>
+                                                <button type="button" class="minus-btn" onclick="decrement('adults')">-</button>
+                                                <input type="number" id="adults" name="adults" value="1" min="1" readonly>
+                                                <button type="button" class="plus-btn" onclick="increment('adults')">+</button>
+                                            </div>
+                                            <div class="passenger-type">
+                                                <label>Children (2-14)</label>
+                                                <button type="button" class="minus-btn" onclick="decrement('children')">-</button>
+                                                <input type="number" id="children" name="children" value="0" min="0" readonly>
+                                                <button type="button" class="plus-btn" onclick="increment('children')">+</button>
+                                            </div>
+                                            <div class="passenger-type">
+                                                <label>Infants (0-2)</label>
+                                                <button type="button" class="minus-btn" onclick="decrement('infants')">-</button>
+                                                <input type="number" id="infants" name="infants" value="0" min="0" readonly>
+                                                <button type="button" class="plus-btn" onclick="increment('infants')">+</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
 
-                            <form>
-                                <label >Country: </label>
-                                <input id="productName" name="country" placeholder="Origin">
-                            </form>
+
+                            <script>
+                                function increment(id) {
+                                    const input = document.getElementById(id);
+                                    input.value = parseInt(input.value) + 1;
+                                    updateTotal();
+                                }
+
+                                function decrement(id) {
+                                    const input = document.getElementById(id);
+                                    if (parseInt(input.value) > 0) {
+                                        input.value = parseInt(input.value) - 1;
+                                    }
+                                    updateTotal();
+                                }
+
+                                function updateTotal() {
+                                    const adults = parseInt(document.getElementById("adults").value);
+                                    const children = parseInt(document.getElementById("children").value);
+                                    const infants = parseInt(document.getElementById("infants").value);
+                                    const total = `${adults} adult${adults > 1 ? 's' : ''}`;
+                                    document.getElementById("totalPassengers").textContent = total +
+                                        (children > 0 ? `, ${children} child${children > 1 ? 'ren' : ''}` : '') +
+                                        (infants > 0 ? `, ${infants} infant${infants > 1 ? 's' : ''}` : '');
+                                }
+
+                                document.getElementById("dropdownBtn").addEventListener("click", () => {
+                                    const content = document.getElementById("dropdownContent");
+                                    content.style.display = content.style.display === "block" ? "none" : "block";
+                                });
+
+                            </script>
 
 
                             <div class="col-1 col-lg-4 col-sm-4 col-md-1 ms-lg-4">
@@ -133,41 +198,10 @@
                                     Search
                                 </button>
                             </div>
-                        </div>
-                        <div class="d-flex flex-row mt-2 flex-column flex-lg-row flex-md-row flex-sm-row">
-                            <div class="col-2 col-md-2 ms-lg-5 ms-md-5 d-flex justify-content-evenly">
-                                Adults
-                                <button type="button" class="btn btn-secondary btn-sm rounded-circle ">
-                                    -
-                                </button>
-                                1
-                                <button type="button" class="btn btn-sm rounded-circle" style="background-color: #5DB4D0; color:white">
-                                    +
-                                </button>
-                            </div>
-                            <div class="col-2 col-md-2 ms-lg-5 ms-md-5  d-flex justify-content-evenly">
-                                Children
-                                <button type="button" class="btn btn-secondary btn-sm rounded-circle">
-                                    -
-                                </button>
-                                1
-                                <button type="button" class="btn btn-sm rounded-circle" style="background-color: #5DB4D0; color:white">
-                                    +
-                                </button>
-                            </div>
-                            <div class="col-2 col-lg-2 col-md-2 ms-lg-5 ms-md-5 d-flex justify-content-evenly">
-                                Infants
-                                <button type="button" class="btn btn-secondary btn-sm rounded-circle">
-                                    -
-                                </button>
-                                1
-                                <button type="button" class="btn btn-sm rounded-circle" style="background-color: #5DB4D0; color:white">
-                                    +
-                                </button>
 
 
-                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
