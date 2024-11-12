@@ -25,7 +25,7 @@ public class HomeController {
         return countryService.search(term);
     }
 
-    @PostMapping
+    @PostMapping("/sendData")
     public String selectCountry(@ModelAttribute("country") Country country, Model model) {
         model.addAttribute("selectedCountryName", country.getName());
         model.addAttribute("country", country);
