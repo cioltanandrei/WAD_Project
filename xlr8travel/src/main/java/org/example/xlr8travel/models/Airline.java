@@ -8,7 +8,7 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@ToString(exclude = {})
+@ToString(exclude = "flights")
 @Getter
 @Setter
 public class Airline {

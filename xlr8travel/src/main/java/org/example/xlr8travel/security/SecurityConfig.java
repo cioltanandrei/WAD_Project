@@ -45,9 +45,9 @@ public class SecurityConfig{
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().and()  // Enable CSRF protection
+                .csrf().disable()  // Enable CSRF protection
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/index/**","/users/add/**").hasAnyRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/index/**", "/users/add/**").hasAnyRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/loginn/**", "/cart/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/", "/css/**", "/loginn/", "/signup/", "/**").permitAll())
                 .formLogin(form -> form

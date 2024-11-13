@@ -2,6 +2,8 @@ package org.example.xlr8travel.services;
 
 import org.example.xlr8travel.models.Flight;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public interface FlightService {
@@ -11,4 +13,6 @@ public interface FlightService {
     List<Flight> findAll();
 
     Flight findById(Long id);
+
+    List<Flight> findByOriginAndDestinationAndArrivalDateAndDepartureDate(String origin, String destination, LocalDate arrivalDate, LocalDate departureDate);
 }

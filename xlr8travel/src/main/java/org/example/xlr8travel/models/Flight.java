@@ -1,8 +1,10 @@
 package org.example.xlr8travel.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
@@ -11,7 +13,7 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@ToString(exclude = {})
+@ToString(exclude = "airline")
 @Getter
 @Setter
 
@@ -23,18 +25,21 @@ public class Flight {
     private String name;
     private LocalTime departureTime;
     private LocalTime arrivalTime;
+    private String origin;
+    private String destination;
+    private LocalDate departureDate;
+    private LocalDate arrivalDate;
     private String terminal;
     private String gate;
     private LocalDateTime lastUpdated; // last updated time
 
-    public Flight(String name, LocalTime departureTime, LocalTime arrivalTime, String terminal, String gate, LocalDateTime lastUpdated) {
-        this.name = name;
-        this.departureTime = departureTime;
-        this.arrivalTime = arrivalTime;
-        this.terminal = terminal;
-        this.gate = gate;
-        this.lastUpdated = lastUpdated;
-    }
+    @ManyToOne
+    @JsonIgnore
+    private Airline airline;
+
+    @OneToMany(mappedBy = "flight",cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<Ticket> tickets = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
@@ -48,12 +53,6 @@ public class Flight {
     public int hashCode() {
         return Objects.hash(name, departureTime, arrivalTime, terminal, gate, lastUpdated);
     }
-
-    @ManyToOne
-    private Airline airline;
-
-    @OneToMany(mappedBy = "flight",cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private Set<Ticket> tickets = new HashSet<>();
 
     public void addTicket(Ticket ticket){
         this.getTickets().add(ticket);

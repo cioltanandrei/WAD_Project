@@ -1,6 +1,8 @@
 package org.example.xlr8travel.bootloader;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.xlr8travel.models.*;
+import org.example.xlr8travel.repositories.FlightRepository;
 import org.example.xlr8travel.services.AirlineService;
 import org.example.xlr8travel.services.FlightService;
 import org.example.xlr8travel.services.TicketService;
@@ -13,9 +15,12 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Date;
+import java.util.HashSet;
 
 
 @Component
+@Slf4j
 public class DataLoader implements CommandLineRunner {
 
     private final TicketService ticketService;
@@ -23,12 +28,14 @@ public class DataLoader implements CommandLineRunner {
     private final AirlineService airlineService;
 
     private final FlightService flightService;
+    private final FlightRepository flightRepository;
 
-    public DataLoader(TicketService ticketService, UserService userService, AirlineService airlineService, FlightService flightService) {
+    public DataLoader(TicketService ticketService, UserService userService, AirlineService airlineService, FlightService flightService, FlightRepository flightRepository) {
         this.ticketService = ticketService;
         this.userService = userService;
         this.airlineService = airlineService;
         this.flightService = flightService;
+        this.flightRepository = flightRepository;
     }
 
     @Override
@@ -107,11 +114,18 @@ public class DataLoader implements CommandLineRunner {
         // airlines.forEach(System.out::println); // to modify @ToString(exclude = {})
 // --------------------------------------------------------------
 
-        Flight flight1 = new Flight("xlr8Travel", LocalTime.of(3,30), LocalTime.of(6,30), "A", "1", LocalDateTime.now());
-
+       // Flight flight1 = new Flight("xlr8Travel", LocalTime.of(3,30), LocalTime.of(6,30), "A", "1", LocalDateTime.now());
+        LocalDate date = LocalDate.of(2024, 11, 13);
+        Flight flight1 = new Flight(null, "Flight 101", LocalTime.of(3, 30), LocalTime.of(6, 30), "Romania", "Germany",date, date, "A", "1", LocalDateTime.now(), null, new HashSet<>());
+        Flight flight2 = new Flight(null, "Flight 101", LocalTime.of(3, 30), LocalTime.of(6, 30), "Romania", "Italy",date, date, "A", "1", LocalDateTime.now(), null, new HashSet<>());
         airline.addFlight(flight1);
+        airline.addFlight(flight2);
 
         flightService.save(flight1);
+        flightService.save(flight2);
+        System.out.println(flight1.getArrivalDate().toString());
+        System.out.println(flight1.getDepartureDate().toString());
+        System.out.println(flightService.findByOriginAndDestinationAndArrivalDateAndDepartureDate("Romania","Germany",flight1.getArrivalDate(),flight1.getDepartureDate()));
 
   //     --------------------------------------------------------------
 
