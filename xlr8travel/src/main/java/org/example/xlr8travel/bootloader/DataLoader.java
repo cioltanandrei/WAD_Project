@@ -115,14 +115,20 @@ public class DataLoader implements CommandLineRunner {
 // --------------------------------------------------------------
 
        // Flight flight1 = new Flight("xlr8Travel", LocalTime.of(3,30), LocalTime.of(6,30), "A", "1", LocalDateTime.now());
-        LocalDate date = LocalDate.of(2024, 11, 13);
-        Flight flight1 = new Flight(null, "Flight 101", LocalTime.of(3, 30), LocalTime.of(6, 30), "Romania", "Germany",date, date, "A", "1", LocalDateTime.now(), null, new HashSet<>());
-        Flight flight2 = new Flight(null, "Flight 101", LocalTime.of(3, 30), LocalTime.of(6, 30), "Romania", "Italy",date, date, "A", "1", LocalDateTime.now(), null, new HashSet<>());
+        LocalDate date = LocalDate.of(2025, 1, 13);
+        Flight flight1 = new Flight(null, "Flight 101", LocalTime.of(3, 30), LocalTime.of(6, 30), "Romania", "Germany",date, date, "A", "1", LocalDateTime.now(), null, new HashSet<>(),150.0);
+        Flight flight2 = new Flight(null, "Flight 101", LocalTime.of(3, 30), LocalTime.of(6, 30), "Romania", "Italy",date, date, "A", "1", LocalDateTime.now(), null, new HashSet<>(), 200.0);
+        Flight flight3 = new Flight(null, "Flight 300", LocalTime.of(3, 30), LocalTime.of(6, 30), "Germany", "Italy",date, date, "R", "10", LocalDateTime.now(), null, new HashSet<>(), 200.0);
+        Flight flight4 = new Flight(null, "Flight 301", LocalTime.of(3, 30), LocalTime.of(6, 30), "Germany", "Italy",date, date, "D", "10", LocalDateTime.now(), null, new HashSet<>(), 250.0);
         airline.addFlight(flight1);
         airline.addFlight(flight2);
+        airline.addFlight(flight3);
+        airline.addFlight(flight4);
 
         flightService.save(flight1);
         flightService.save(flight2);
+        flightService.save(flight3);
+        flightService.save(flight4);
         System.out.println(flight1.getArrivalDate().toString());
         System.out.println(flight1.getDepartureDate().toString());
         System.out.println(flightService.findByOriginAndDestinationAndArrivalDateAndDepartureDate("Romania","Germany",flight1.getArrivalDate(),flight1.getDepartureDate()));

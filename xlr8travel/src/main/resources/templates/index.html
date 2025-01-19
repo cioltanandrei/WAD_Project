@@ -62,6 +62,9 @@
                 <li class="nav-item  me-4">
                     <a class="nav-link active" href="checkin/1">Check-in & Booking</a>
                 </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a class="nav-link active" th:href="@{/cart}">View Cart</a>
+                </li>
                 <li class="nav-item  me-4" sec:authorize="!isAuthenticated()">
                     <a class="nav-link active" href="signup">Sign Up</a>
                 </li>
@@ -71,12 +74,16 @@
                     </form>
                 </li>
                 <li class="nav-item  me-4" sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a class="nav-link active" href="users">Manage Users</a>
+                    <a class="nav-link active" href="/users">Manage Users</a>
+                </li>
+                <li class="nav-item me-4" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link active" href="/flights/add">Add Flight</a>
                 </li>
 
 
 
-                        <!-- Other nav items -->
+
+                <!-- Other nav items -->
             </ul>
         </div>
     </nav>
