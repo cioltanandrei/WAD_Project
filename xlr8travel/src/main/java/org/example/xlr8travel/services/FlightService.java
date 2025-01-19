@@ -14,5 +14,9 @@ public interface FlightService {
 
     Flight findById(Long id);
 
+    Flight updateFlight(Flight updatedFlight);
+
+    void deleteFlightById(Long flightId);
+
     List<Flight> findByOriginAndDestinationAndArrivalDateAndDepartureDate(String origin, String destination, LocalDate arrivalDate, LocalDate departureDate);
 }

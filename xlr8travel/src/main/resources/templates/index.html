@@ -68,16 +68,20 @@
                 <li class="nav-item  me-4" sec:authorize="!isAuthenticated()">
                     <a class="nav-link active" href="signup">Sign Up</a>
                 </li>
-                <li class="nav-item  me-4" sec:authorize="isAuthenticated()">
-                    <form th:action="@{/logout}" method="post" id="my_form">
-                        <a class="nav-link active" type="submit" href="javascript:{}" onclick="document.getElementById('my_form').submit(); return false;">Log Out</a>
-                    </form>
-                </li>
+
                 <li class="nav-item  me-4" sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link active" href="/users">Manage Users</a>
                 </li>
                 <li class="nav-item me-4" sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link active" href="/flights/add">Add Flight</a>
+                </li>
+                <li class="nav-item me-4" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link active" href="/flights/manage">Manage Flights</a>
+                </li>
+                <li class="nav-item  me-4" sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" method="post" id="my_form">
+                        <a class="nav-link active" type="submit" href="javascript:{}" onclick="document.getElementById('my_form').submit(); return false;">Log Out</a>
+                    </form>
                 </li>
 
 

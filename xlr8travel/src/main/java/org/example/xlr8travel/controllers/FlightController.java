@@ -40,4 +40,51 @@ public class FlightController {
         return "redirect:/flights/add?success=1";
     }
 
+    // Show list of flights (manage page)
+    @GetMapping("/manage")
+    public String manageFlights(Model model,
+                                @RequestParam(value = "success", required = false) String success,
+                                @RequestParam(value = "deleted", required = false) String deleted) {
+        var flights = flightService.findAll();
+        model.addAttribute("flights", flights);
+
+        // If we have a success param, show update message
+        if (success != null) {
+            model.addAttribute("successMessage", "Flight updated successfully!");
+        }
+
+        // If we have a deleted param, show delete message
+        if (deleted != null) {
+            model.addAttribute("successMessage", "Flight deleted successfully!");
+        }
+
+        return "manageFlights";
+    }
+
+    // Display form to edit a flight
+    @GetMapping("/edit/{id}")
+    public String editFlightForm(@PathVariable("id") Long flightId, Model model) {
+        Flight existingFlight = flightService.findById(flightId);
+        if (existingFlight == null) {
+            // If flight not found, redirect or show error
+            return "redirect:/flights/manage";
+        }
+        model.addAttribute("flight", existingFlight);
+        return "editFlight";
+    }
+
+    // Update flight (POST)
+    @PostMapping("/edit")
+    public String updateFlight(@ModelAttribute("flight") Flight flight) {
+        flightService.updateFlight(flight);
+        return "redirect:/flights/manage?success=1";
+    }
+
+    // ===== NEW: Delete flight (POST) =====
+    @PostMapping("/delete/{id}")
+    public String deleteFlight(@PathVariable("id") Long flightId) {
+        flightService.deleteFlightById(flightId);
+        return "redirect:/flights/manage?deleted=1";
+    }
+
 }
